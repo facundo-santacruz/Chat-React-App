@@ -1,49 +1,49 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
     Link,
     useHistory
-}from 'react-router-dom';
-import { 
+  } from "react-router-dom";
+import {
     Jumbotron,
     Spinner,
     ListGroup,
     ListGroupItem,
     Button
-} from "reactstrap";
-import Moment from "moment";
-import firebase from "../firebaseConfig";
+} from 'reactstrap';
+import Moment from 'moment';
+import firebase from '../firebaseConfig';
 
-const RoomList = () => {
-
-    const [room, setRoom ] = useState([]);
+function RoomList() {
+    const [room, setRoom] = useState([]);
+    const [showLoading, setShowLoading] = useState(true);
+    const [nickname, setNickname] = useState('');
     const history = useHistory();
-    const [nickname, setNickname] = useState("");
-    const [showLoading, setShowLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             setNickname(localStorage.getItem('nickname'));
-            firebase.database().ref('room/').on('value', resp => {
+            firebase.database().ref('rooms/').on('value', resp => {
                 setRoom([]);
                 setRoom(snapshotToArray(resp));
                 setShowLoading(false);
             });
-        }
-
+        };
+      
         fetchData();
-    },[]);
+    }, []);
 
     const snapshotToArray = (snapshot) => {
         const returnArr = [];
 
-        snapshot.forEach(childSnapshot => {
-            const item =childSnapshot.val();
+        snapshot.forEach((childSnapshot) => {
+            const item = childSnapshot.val();
             item.key = childSnapshot.key;
             returnArr.push(item);
         });
 
         return returnArr;
     }
+
     const enterChatRoom = (roomname) => {
         const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
         chat.roomname = roomname;
@@ -100,5 +100,4 @@ const RoomList = () => {
     );
 }
 
-
-export default RoomList
+export default RoomList;

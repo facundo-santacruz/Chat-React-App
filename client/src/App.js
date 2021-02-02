@@ -26,9 +26,9 @@ let location = useLocation();
         />
         <Switch>
           <Route path="/login" component={Login} />
-          <SecureRoute path="/roomList"><RoomList /></SecureRoute>
-          <SecureRoute path="/addRoom"><AddRoom /></SecureRoute>
-          <SecureRoute path="/chatRoom/:room"><AddRoom /></SecureRoute>
+          <SecureRoute path="/roomlist"><RoomList /></SecureRoute>
+          <SecureRoute path="/addroom"><AddRoom /></SecureRoute>
+          <SecureRoute path="/chatroom/:room"><ChatRoom /></SecureRoute>
         </Switch>
       </div>
 

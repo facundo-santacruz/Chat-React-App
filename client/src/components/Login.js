@@ -34,7 +34,7 @@ function Login() {
                 newUser.set(creds);
                 localStorage.setItem('nickname', creds.nickname);
             }
-            history.push('/roomList');
+            history.push('/roomlist');
             setShowLoading(false);
         })
     }
