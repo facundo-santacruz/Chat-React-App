@@ -26,9 +26,9 @@ let location = useLocation();
         />
         <Switch>
           <Route path="/login" component={Login} />
-          <SecureRoute path="/roomList" component={RoomList} />
-          <SecureRoute path="/addRoom" component={AddRoom} />
-          <SecureRoute path="/chatRoom/:room" component={ChatRoom} />
+          <SecureRoute path="/roomList"><RoomList /></SecureRoute>
+          <SecureRoute path="/addRoom"><AddRoom /></SecureRoute>
+          <SecureRoute path="/chatRoom/:room"><AddRoom /></SecureRoute>
         </Switch>
       </div>
 
@@ -43,7 +43,7 @@ function SecureRoute({ children, ...rest }) {
     <Route 
       {...rest}
       render={({ location }) =>
-        localStorage.get('nickname') ? (
+        localStorage.getItem('nickname') ? (
           children 
         ) : (
           <Redirect
